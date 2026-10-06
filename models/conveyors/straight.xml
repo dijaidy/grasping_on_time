@@ -1,0 +1,30 @@
+<mujoco model="straight_conveyor">
+  <!-- Local origin: floor below belt center. Length along Y; future travel +Y.
+       Dimensions: 1.20 m long, 0.30 m wide, surface 0.25 m above origin.
+       This is a STATIC contact surface. No belt transport is simulated yet. -->
+  <worldbody>
+    <body name="conveyor">
+      <geom name="conveyor_belt" type="box" pos="0 0 0.235"
+            size="0.15 0.60 0.015" friction="0.8 0.005 0.0001"
+            rgba="0.12 0.17 0.20 1"/>
+
+      <!-- Frame edges stay below the belt surface for gripper clearance. -->
+      <geom name="conveyor_frame_left" type="box" pos="-0.17 0 0.205"
+            size="0.02 0.64 0.035" rgba="0.55 0.59 0.63 1"/>
+      <geom name="conveyor_frame_right" type="box" pos="0.17 0 0.205"
+            size="0.02 0.64 0.035" rgba="0.55 0.59 0.63 1"/>
+      <geom name="conveyor_leg_1" type="box" pos="-0.17 -0.48 0.085"
+            size="0.02 0.025 0.085" rgba="0.35 0.39 0.43 1"/>
+      <geom name="conveyor_leg_2" type="box" pos="0.17 -0.48 0.085"
+            size="0.02 0.025 0.085" rgba="0.35 0.39 0.43 1"/>
+      <geom name="conveyor_leg_3" type="box" pos="-0.17 0.48 0.085"
+            size="0.02 0.025 0.085" rgba="0.35 0.39 0.43 1"/>
+      <geom name="conveyor_leg_4" type="box" pos="0.17 0.48 0.085"
+            size="0.02 0.025 0.085" rgba="0.35 0.39 0.43 1"/>
+
+      <!-- Markers only: sites do not create collision geometry. -->
+      <site name="conveyor_entry" pos="0 -0.5 0.251" size="0.008" rgba="0.2 0.8 0.4 1"/>
+      <site name="conveyor_exit" pos="0 0.5 0.251" size="0.008" rgba="0.9 0.3 0.2 1"/>
+    </body>
+  </worldbody>
+</mujoco>

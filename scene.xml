@@ -1,0 +1,36 @@
+<mujoco model="franka_conveyor_grasping">
+  <!-- Default straight scene. simulate.py substitutes the selected conveyor
+       asset and placement frames in memory using the experiment JSON. -->
+  <compiler angle="radian" autolimits="true"/>
+
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast"/>
+  <statistic center="0.3 0 0.3" extent="1.4"/>
+  <visual>
+    <headlight diffuse="0.7 0.7 0.7" ambient="0.3 0.3 0.3" specular="0.1 0.1 0.1"/>
+    <global azimuth="135" elevation="-25"/>
+  </visual>
+
+  <worldbody>
+    <light name="scene_light" pos="0.5 -0.5 2" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="2 2 0.05" rgba="0.80 0.82 0.84 1"/>
+
+    <!-- Attach reusable components with scene-level poses. Robot base is (0,0,0). -->
+    <frame name="robot_placement" pos="0 0 0">
+      <attach model="franka_panda" prefix=""/>
+    </frame>
+    <frame name="conveyor_placement" pos="0.50 0 0">
+      <attach model="straight_conveyor" prefix=""/>
+    </frame>
+    <!-- 0.25 m belt top + 0.02 m box half-height + 0.002 m drop clearance. -->
+    <frame name="box_placement" pos="0.50 -0.30 0.272">
+      <attach model="grasp_box" prefix=""/>
+    </frame>
+  </worldbody>
+
+  <asset>
+    <!-- Each sub-model resolves its own assets; original Panda files stay intact. -->
+    <model name="franka_panda" file="models/franka_emika_panda/panda.xml"/>
+    <model name="straight_conveyor" file="models/conveyors/straight.xml"/>
+    <model name="grasp_box" file="models/objects/box.xml"/>
+  </asset>
+</mujoco>

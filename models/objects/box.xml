@@ -1,0 +1,14 @@
+<mujoco model="grasp_box">
+  <worldbody>
+    <!-- The scene supplies the initial world position using a frame.
+         Keep this body independent of the conveyor so it can be lifted. -->
+    <body name="target_box">
+      <freejoint name="target_box_free"/>
+      <!-- Box size is HALF-extents: full dimensions 0.04 x 0.04 x 0.04 m. -->
+      <geom name="target_box_geom" type="box" size="0.02 0.02 0.02"
+            mass="0.1" friction="0.8 0.005 0.0001" condim="4"
+            rgba="0.95 0.40 0.12 1"/>
+      <site name="target_box_center" size="0.003" rgba="1 1 1 0"/>
+    </body>
+  </worldbody>
+</mujoco>
